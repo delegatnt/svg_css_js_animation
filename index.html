@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG Animation</title>
+
+    <style>
+        .path_line {
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            animation-name: line;
+        }
+
+        @keyframes line {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <svg width="886" height="563" viewBox="0 0 886 563" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="path_line" d="M1 562V1H885V562H1Z" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M140.5 1V562" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M285 1V562" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M429.5 1V562" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M574 1V562" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M718.5 1V562" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 52.5H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 109H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 165.5H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 222H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 278.5H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 335H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 391.5H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 448H884.5" stroke="black" stroke-width="2"/>
+        <path class="path_line" d="M1 504.5H884.5" stroke="black" stroke-width="2"/>
+    </svg>    
+    
+    <script>
+
+        let len = 0;
+        let speed = 10;
+        let delay = 0;
+        
+        const paths = document.querySelectorAll('.path_line');
+        
+        paths.forEach(element => {
+            let elementLen = element.getTotalLength();
+            len += elementLen;
+        })
+
+        paths.forEach(element => {
+            let elementLen = element.getTotalLength();
+            let duration = elementLen / len * speed;
+            
+            element.style.animationDuration = `${duration}s`;
+            element.style.animationDelay = `${delay}s`;
+
+            element.setAttribute('stroke-dasharray', elementLen);
+            element.setAttribute('stroke-dashoffset', elementLen);
+            delay += duration + 0.2;
+        })
+
+    </script>
+</body>
+</html>
